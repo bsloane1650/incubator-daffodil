@@ -48,7 +48,7 @@ trait TypeCalculatorNamedDispatch { self: FNTwoArgs =>
     val refType = QName.resolveRef(qn, runtimeData.namespaces, runtimeData.tunable).get.toGlobalQName
     val maybeCalc = dstate.maybeSsrd.get.typeCalculators.get(refType)
     if (!maybeCalc.isDefined) {
-      throw FNErrorFunctionException(Maybe(runtimeData.schemaFileLocation), dstate.contextLocation, s"Simple type ${refType} does not exist or does not have a repType")
+      dstate.SDE("Simple type %s does not exist or does not have a repType", refType)
     }
     val calc = maybeCalc.get
     if (!expectedInputType.isSubtypeOf(calc.srcType)) {
