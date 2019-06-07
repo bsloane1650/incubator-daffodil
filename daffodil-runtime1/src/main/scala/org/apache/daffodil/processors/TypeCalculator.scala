@@ -38,6 +38,7 @@ import org.apache.daffodil.processors.parsers.ParseError
 import org.apache.daffodil.util.Maybe.One
 import org.apache.daffodil.dpath.NodeInfo.Kind
 import org.apache.daffodil.dpath.NodeInfo
+import org.apache.daffodil.xml.GlobalQName
 
 abstract class TypeCalculator[A <: AnyRef, B <: AnyRef](val srcType: NodeInfo.Kind, val dstType: NodeInfo.Kind)
   extends Serializable {
@@ -395,6 +396,9 @@ object RepValueSetCompiler {
 }
 
 object TypeCalculatorCompiler {
+  
+  type TypeCalcMap = Map[GlobalQName, TypeCalculator[AnyRef, AnyRef]]
+  
   // mappings: [(keySet, canonicalKey, value)]
   def compileKeysetValue[A <: AnyRef, B <: AnyRef](mappings: Seq[(RepValueSet[A], A, B)], srcType: NodeInfo.Kind, dstType: NodeInfo.Kind): TypeCalculator[A, B] = {
     Assert.invariant(!mappings.isEmpty)

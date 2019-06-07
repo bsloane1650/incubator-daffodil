@@ -36,6 +36,11 @@ import org.apache.daffodil.processors.ParseOrUnparseState
 import org.apache.daffodil.api.DaffodilTunables
 import org.apache.daffodil.api.UnqualifiedPathStepPolicy
 import org.apache.daffodil.api.WarnID
+import org.apache.daffodil.processors.SchemaSetRuntimeData
+import org.apache.daffodil.processors.SchemaSetRuntimeData
+import org.apache.daffodil.processors.SchemaSetRuntimeData
+import org.apache.daffodil.processors.TypeCalculatorCompiler.TypeCalcMap
+import org.apache.daffodil.processors.TypeCalculatorCompiler.TypeCalcMap
 
 trait ContentValueReferencedElementInfoMixin {
 
@@ -200,7 +205,8 @@ class DPathCompileInfo(
   val namespaces: scala.xml.NamespaceBinding,
   val path: String,
   override val schemaFileLocation: SchemaFileLocation,
-  val tunable: DaffodilTunables)
+  val tunable: DaffodilTunables,
+  val typeCalcMap: TypeCalcMap)
   extends ImplementsThrowsSDE with PreSerialization
   with HasSchemaFileLocation {
 
@@ -309,8 +315,9 @@ class DPathElementCompileInfo(
   val namedQName: NamedQName,
   val optPrimType: Option[PrimType],
   sfl: SchemaFileLocation,
-  override val tunable: DaffodilTunables)
-  extends DPathCompileInfo(parentArg, variableMap, namespaces, path, sfl, tunable)
+  override val tunable: DaffodilTunables,
+  typeCalcMap: TypeCalcMap)
+  extends DPathCompileInfo(parentArg, variableMap, namespaces, path, sfl, tunable, typeCalcMap)
   with HasSchemaFileLocation {
 
   lazy val elementChildrenCompileInfo = elementChildrenCompileInfoArg

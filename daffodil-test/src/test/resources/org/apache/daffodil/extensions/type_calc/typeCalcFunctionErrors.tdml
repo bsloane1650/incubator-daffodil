@@ -372,4 +372,53 @@
     </tdml:errors>
   </tdml:parserTestCase>
 
+  <tdml:defineSchema name="nonexistantTypeCalcType_01.dfdl.xsd">
+    <xs:include schemaLocation="org/apache/daffodil/xsd/DFDLGeneralFormat.dfdl.xsd"/>
+    <dfdl:format ref="ex:GeneralFormat" lengthKind="implicit"
+      lengthUnits="bytes" encoding="UTF-8" separator="" initiator=""
+      terminator="" occursCountKind="parsed" ignoreCase="no"
+      textNumberRep="standard" representation="binary" 
+      daf:parseUnparsePolicy="parseOnly"
+      />
+
+     <xs:element name="root" type="xs:int" dfdl:inputValueCalc="{ dfdl:inputTypeCalcInt('tns:nonExistant', 0) }"/>
+
+  </tdml:defineSchema>
+
+  <tdml:parserTestCase name="nonexistantTypeCalcType_01"
+    root="root" model="nonexistantTypeCalcType_01.dfdl.xsd" description="Extensions - inputTypeCalc errors">
+    <tdml:document>
+    <tdml:documentPart type="byte"></tdml:documentPart>
+    </tdml:document>
+    <tdml:errors>
+      <tdml:error>Schema Definition Error</tdml:error>
+      <tdml:error>FOO</tdml:error>
+    </tdml:errors>
+  </tdml:parserTestCase>
+
+  <tdml:defineSchema name="nonexistantTypeCalcType_02.dfdl.xsd">
+    <xs:include schemaLocation="org/apache/daffodil/xsd/DFDLGeneralFormat.dfdl.xsd"/>
+    <dfdl:format ref="ex:GeneralFormat" lengthKind="implicit"
+      lengthUnits="bytes" encoding="UTF-8" separator="" initiator=""
+      terminator="" occursCountKind="parsed" ignoreCase="no"
+      textNumberRep="standard" representation="binary" 
+      daf:parseUnparsePolicy="parseOnly"
+      />
+
+     <xs:simpleType name="nonExistantTypeCalc" type="xs:int" dfdl:lenthKind="explicit" dfdl:length="1" />
+     <xs:element name="root" type="xs:int" dfdl:inputValueCalc="{ dfdl:inputTypeCalcInt('tns:nonExistantTypeCalc', 0) }"/>
+
+  </tdml:defineSchema>
+
+  <tdml:parserTestCase name="nonexistantTypeCalcType_02"
+    root="root" model="nonexistantTypeCalcType_02.dfdl.xsd" description="Extensions - inputTypeCalc errors">
+    <tdml:document>
+    <tdml:documentPart type="byte"></tdml:documentPart>
+    </tdml:document>
+    <tdml:errors>
+      <tdml:error>Schema Definition Error</tdml:error>
+      <tdml:error>FOO</tdml:error>
+    </tdml:errors>
+  </tdml:parserTestCase>
+
 </tdml:testSuite>

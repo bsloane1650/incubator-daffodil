@@ -25,6 +25,8 @@ import scala.util.parsing.input.CharSequenceReader
 import scala.util.parsing.combinator.RegexParsers
 import java.math.{ BigDecimal => JBigDecimal, BigInteger => JBigInt }
 import org.apache.daffodil.oolag.OOLAG._
+import org.apache.daffodil.processors.TypeCalculator
+import org.apache.daffodil.processors.TypeCalculatorCompiler.TypeCalcMap
 
 /**
  * Parses DPath expressions. Most real analysis is done later. This is

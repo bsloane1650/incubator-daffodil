@@ -299,7 +299,8 @@ trait ElementBase
       namedQName,
       optPrimType,
       schemaFileLocation,
-      tunable)
+      tunable,
+      schemaSet.typeCalcMap)
     eci
   }
 
